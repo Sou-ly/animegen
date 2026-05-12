@@ -13,8 +13,6 @@ dependencies = [
     "fal-client",
     "Pillow",
     "pyyaml",
-    "paddleocr",
-    "paddlepaddle",
     "webtoon-downloader",
 ]
 
