@@ -1,14 +1,18 @@
 import json
+import logging
 import re
 from pathlib import Path
 from urllib.parse import urlparse
 
 from animegen.config import load_config
 from animegen.download import download_chapter
+from animegen.logger import setup as setup_logging
 from animegen.segment import segment_panels
 from animegen.analyze import analyze_panels
 from animegen.generate import generate_videos
 from animegen.assemble import assemble_video
+
+logger = logging.getLogger(__name__)
 
 STAGES = ["download", "segment", "analyze", "generate", "assemble"]
 
@@ -94,8 +98,10 @@ def run_pipeline(url: str, chapter: int, config_path: str = "config.yaml",
     slug = _slug_from_url(url)
     dirs = _make_dirs(cfg, slug, chapter)
 
-    print(f"Project: {slug} chapter {chapter}")
-    print(f"Output:  {dirs['final']}")
+    setup_logging(dirs["final"], chapter)
+
+    logger.info("Project: %s chapter %d", slug, chapter)
+    logger.info("Output:  %s", dirs["final"])
 
     # Stage 1: Download
     if _should_run("download", start_stage, end_stage):
@@ -133,4 +139,4 @@ def run_pipeline(url: str, chapter: int, config_path: str = "config.yaml",
     if _should_run("assemble", start_stage, end_stage):
         output_path = dirs["final"] / f"chapter_{chapter}.mp4"
         assemble_video(video_paths, output_path)
-        print(f"Done! Output: {output_path}")
+        logger.info("Done! Output: %s", output_path)

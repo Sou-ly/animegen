@@ -1,8 +1,11 @@
+import logging
 import subprocess
 from collections import Counter
 from pathlib import Path
 
 from PIL import Image
+
+logger = logging.getLogger(__name__)
 
 
 def _filter_ads(images: list[Path]) -> list[Path]:
@@ -13,7 +16,7 @@ def _filter_ads(images: list[Path]) -> list[Path]:
     most_common_width = Counter(widths).most_common(1)[0][0]
     filtered = [p for p, w in zip(images, widths) if w == most_common_width]
     if len(filtered) < len(images):
-        print(f"Filtered {len(images) - len(filtered)} ad/promo images (width != {most_common_width})")
+        logger.info("Filtered %d ad/promo images (width != %d)", len(images) - len(filtered), most_common_width)
     return filtered
 
 
@@ -42,5 +45,5 @@ def download_chapter(url: str, chapter: int, output_dir: str) -> list[Path]:
         raise RuntimeError(f"No images found in {out} after download")
 
     images = _filter_ads(images)
-    print(f"Downloaded {len(images)} images to {out}")
+    logger.info("Downloaded %d images to %s", len(images), out)
     return images

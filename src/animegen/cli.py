@@ -15,3 +15,7 @@ def main():
     args = parser.parse_args()
 
     run_pipeline(args.url, args.chapter, args.config, args.start_stage, args.end_stage)
+
+
+if __name__ == "__main__":
+    main()

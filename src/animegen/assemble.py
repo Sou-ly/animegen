@@ -1,5 +1,8 @@
+import logging
 import subprocess
 from pathlib import Path
+
+logger = logging.getLogger(__name__)
 
 
 def assemble_video(video_paths: list[Path], output_path: Path) -> Path:
@@ -22,5 +25,5 @@ def assemble_video(video_paths: list[Path], output_path: Path) -> Path:
     ], check=True, capture_output=True)
 
     concat_list.unlink()
-    print(f"Assembled {len(video_paths)} clips into {output_path}")
+    logger.info("Assembled %d clips into %s", len(video_paths), output_path)
     return output_path

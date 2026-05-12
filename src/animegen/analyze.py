@@ -1,8 +1,11 @@
 import base64
 import json
+import logging
 from pathlib import Path
 
 import anthropic
+
+logger = logging.getLogger(__name__)
 
 
 SYSTEM_PROMPT = """\
@@ -70,11 +73,11 @@ def analyze_panels(panel_paths: list[Path], cfg: dict) -> list[dict]:
         parsed["panel_index"] = i
         results.append(parsed)
         accumulated.append(parsed)
-        print(f"Analyzed panel {i+1}/{len(panel_paths)}: {parsed.get('description', '')[:80]}")
+        logger.info("Analyzed panel %d/%d: %s", i + 1, len(panel_paths), parsed.get("description", "")[:80])
 
     out_path = Path(analyze_cfg["output_dir"]) / "analysis.json"
     out_path.parent.mkdir(parents=True, exist_ok=True)
     out_path.write_text(json.dumps(results, indent=2))
-    print(f"Analysis saved to {out_path}")
+    logger.info("Analysis saved to %s", out_path)
 
     return results
