@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=68.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "animegen"
+version = "0.1.0"
+requires-python = ">=3.10"
+dependencies = [
+    "opencv-python-headless",
+    "numpy",
+    "anthropic",
+    "fal-client",
+    "Pillow",
+    "pyyaml",
+    "paddleocr",
+    "paddlepaddle",
+    "webtoon-downloader",
+]
+
+[project.scripts]
+animegen = "animegen.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]

@@ -1,0 +1,11 @@
+Metadata-Version: 2.4
+Name: animegen
+Version: 0.1.0
+Requires-Python: >=3.10
+Requires-Dist: opencv-python-headless
+Requires-Dist: numpy
+Requires-Dist: anthropic
+Requires-Dist: fal-client
+Requires-Dist: Pillow
+Requires-Dist: pyyaml
+Requires-Dist: webtoon-downloader

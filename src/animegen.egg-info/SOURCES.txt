@@ -1,0 +1,16 @@
+pyproject.toml
+src/animegen/__init__.py
+src/animegen/analyze.py
+src/animegen/assemble.py
+src/animegen/cli.py
+src/animegen/config.py
+src/animegen/download.py
+src/animegen/generate.py
+src/animegen/pipeline.py
+src/animegen/segment.py
+src/animegen.egg-info/PKG-INFO
+src/animegen.egg-info/SOURCES.txt
+src/animegen.egg-info/dependency_links.txt
+src/animegen.egg-info/entry_points.txt
+src/animegen.egg-info/requires.txt
+src/animegen.egg-info/top_level.txt

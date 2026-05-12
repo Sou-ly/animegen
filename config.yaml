@@ -1,0 +1,16 @@
+output_dir: ./output
+
+segment:
+  min_gap_height: 10
+  gap_threshold: 240
+  blank_row_ratio: 0.95
+  min_panel_height: 100
+
+analyze:
+  model: claude-sonnet-4-20250514
+  max_context_panels: 10
+
+generate:
+  model: fal-ai/kling-video/v3/pro/image-to-video
+  duration: "5"
+  cfg_scale: 0.5
